@@ -1,0 +1,66 @@
+package stepDefinitions;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class todomvc {
+	 WebDriver driver;
+	
+	@Given("^user is entering todomvc $")
+	public void todomvc() throws Throwable {
+	    	     driver= new ChromeDriver();
+	     driver.get("https://todomvc.com/examples/typescript-angular/#/");
+	}
+
+	@When("^user is typing the search term \"([^\"]*)\"$")
+	public void user_is_typing_the_search_term(String searchTerm) throws Throwable {
+	   driver.findElement(By.Xpath("//input[@placeholder='What needs to be done?']")).sendKeys("Drink water Every Hour" + CTRL+Enter);
+	   driver.findElement(By.Xpath("//input[@placeholder='What needs to be done?']")).sendKeys("Exercise Daily" + CTRL+Enter );
+           driver.findElement(By.Xpath("//input[@placeholder='What needs to be done?']")).sendKeys("Clean the House" + CTRL+Enter );
+           driver.findElement(By.Xpath("//input[@placeholder='What needs to be done?']")).sendKeys("Meditate Daily" + CTRL+Enter );
+
+	}
+
+	@When("^enters the status key$")
+	public void enters_the_status_key() throws Throwable {
+	       boolean status = driver.findElement(By.Xpath("//* [contains(text (),'Drink water Every Hour')]")).isDisplayed();
+	       if(status){
+		   System.out.println("Results displayed");
+	   }
+
+	}
+
+	@Then("^the user should see the selected items are crossedouts results$")
+	public void user_should_see_the_selected_items_are_crossedouts_results() throws Throwable {
+	    	 boolean radiobutton1 = driver.findElement(By.Xpath("//li[@class='ng-scope completed']")).isSelected();
+                 boolean radiobutton2 = driver.findElement(By.Xpath(//div[@class='view']//following::button[@class = 'destroy'][2]).isSelected();
+	       
+
+}
+@Then("^the user should delete the items$")
+	public void the_user_should_see_the_search_results() throws Throwable {
+                 boolean radiobutton2 = driver.findElement(By.Xpath(//div[@class='view']//following::button[@class = 'destroy'][3]).click();
+                 if(radiobutton2.isDeleted()){
+                 System.out.println("Item is deleted")
+
+	}
+
+@Then ("^Filtering a to-do $")
+
+        public void Filtering a to-do() throws Throwable {
+                driver.findElement(By.linkText("Active")).click();
+                String actualText = driver.getText();
+                String expectedText= "Meditate Daily";
+                assertEquals(actualText, expectedText, "Text match the expected value");
+                driver.findElement(By.linkText("Completed")).click();
+                String actualText = driver.getText();
+                String expectedText= "Drink water Every Hour" and "Exercise Daily";
+                assertEquals(actualText, expectedText, "Text match the expected value");
+	
+}
